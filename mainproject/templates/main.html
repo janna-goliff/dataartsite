@@ -19,7 +19,7 @@
                 {% for pic in picture_images %}
                  <div class="col-md-4">
                     {{ pic.name }}
-                     <img src="{{ pic.picture_img.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+                     <img src="{{ pic.filtered_img.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
                 </div>
                 {% endfor %}
 

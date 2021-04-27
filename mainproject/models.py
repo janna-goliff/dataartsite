@@ -5,7 +5,9 @@ import uuid
 class Picture(models.Model):
     name = models.CharField(max_length=50, unique=True)
     picture_img = models.ImageField(upload_to='images/')
-    assoc_url = models.CharField(max_length=50, default="filler")
+    # assoc_url = models.CharField(max_length=50, default="filler")
+    filtered_img = models.ImageField()
+    percentage = models.IntegerField()
 
 class FilteredPicture(models.Model):
     name = models.CharField(max_length=50, unique=True)

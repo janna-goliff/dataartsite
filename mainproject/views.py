@@ -25,6 +25,9 @@ def splash(request):
 			currName = request.POST.__getitem__('name')
 			pic = Picture.objects.get(name=currName)
 			
+			# print("			PERCENTAGE")
+			# print("			PERCENTAGE")
+			# print(pic.percentage)
 
 			filename = settings.MEDIA_ROOT[0:-6] + pic.picture_img.url
 			camera = io.imread(filename)
@@ -33,7 +36,7 @@ def splash(request):
 
 			grey = gray2rgb(greyscale)
 
-			percent = 32
+			percent = pic.percentage
 			min_range = 50 - (percent / 2)
 			max_range = 50 + (percent / 2)
 			percentage_min = np.percentile(greyscale, min_range)
@@ -46,22 +49,24 @@ def splash(request):
 
 			camera[mask] = [0, 255, 0]
 
+			# display image
 			io.imshow(camera)
 
 			filename = currName + '.jpg'
 			
 			fullPath = settings.MEDIA_ROOT + "\\filtered_images\\" + filename
 			io.imsave(fullPath, camera)
-			pic.assoc_url = fullPath
+			# pic.assoc_url = fullPath
+			pic.filtered_img = fullPath
 			pic.save()
 
-			newFp = Picture()
-			newFp.name = currName + "_filtered"
-			newFp.picture_img = fullPath
-			newFp.save()
+			# newFp = Picture()
+			# newFp.name = currName + "_filtered"
+			# newFp.picture_img = fullPath
+			# newFp.save()
 
-			fp = FilteredPicture(name=currName, path=fullPath, filename=filename)
-			fp.save()
+			# fp = FilteredPicture(name=currName, path=fullPath, filename=filename)
+			# fp.save()
 
 			io.show()
 

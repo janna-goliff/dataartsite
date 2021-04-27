@@ -6,4 +6,4 @@ class PictureForm(forms.ModelForm):
   
     class Meta:
         model = Picture
-        fields = ['name', 'picture_img']
+        fields = ['name', 'picture_img', 'percentage']
