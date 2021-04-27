@@ -1,0 +1,31 @@
+{% load static %}
+<html>
+    <head>
+        <title>Data art</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'core/style.css' %}">
+    </head>
+    <body style="margin: 0; ">
+        <div style="display: flex; width: 100vw; height: 100vh;">
+            <div style="background-color: #ffedd1; width: 50%; height: 100%;display:flex;justify-content: center; padding: 3em; color: #ffb43b;">
+                <h1 style="font-size: 6em;">A self portrait based on data!</h1>
+            </div>
+            <div style="display: flex; flex-direction:column; align-items: flex-start; justify-content: flex-start; padding: 3em; width: 50%; height: 100%">
+                <h3 style="margin: 0;">😼 image here</h3>
+                <form method = "post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Upload</button>
+                </form>
+                {% for pic in picture_images %}
+                 <div class="col-md-4">
+                    {{ pic.name }}
+                     <img src="{{ pic.picture_img.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+                </div>
+                {% endfor %}
+
+                
+                
+            </div>
+        </div>
+    </body>
+</html>
